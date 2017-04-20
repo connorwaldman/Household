@@ -8,6 +8,7 @@
 
 import UIKit
 import GoogleMaps
+import GooglePlacePicker
 
 class MapViewController: UIViewController {
     
@@ -27,4 +28,27 @@ class MapViewController: UIViewController {
         marker.snippet = "Australia"
         marker.map = mapView
     }
+    
+    @IBAction func pickPlace(sender: UIButton) {
+        let config = GMSPlacePickerConfig(viewport: nil)
+        let placePicker = GMSPlacePicker(config: config)
+        
+        placePicker.pickPlaceWithCallback({ (place, error) -> Void in
+            if let error = error {
+                print("Pick Place error: \(error.localizedDescription)")
+                return
+            }
+            
+            guard let place = place else {
+                print("No place selected")
+                return
+            }
+            
+            print("Place name \(place.name)")
+            print("Place address \(place.formattedAddress)")
+            print("Place attributions \(place.attributions)")
+        })
+    }
+    
+        
 }

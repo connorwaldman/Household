@@ -13,24 +13,33 @@ import GTMOAuth2
 class SignInController: UIViewController, GIDSignInUIDelegate {
     
     @IBOutlet weak var signInButton: GIDSignInButton!
+    
     @IBAction func signOutWasPressed(sender: AnyObject) {
         GIDSignIn.sharedInstance().signOut()
     }
+    
     @IBOutlet var signOutButton: UIButton!
     
     @IBAction func DriveButton(sender: AnyObject) {
     
     }
+    @IBOutlet weak var mapButton: UIButton!
     
     func refreshInterface() {
         if let _ = GIDSignIn.sharedInstance().currentUser {
-            signOutButton.hidden = true
+            signOutButton.hidden = false
            
         } else {
-            signOutButton.hidden = false
+            signOutButton.hidden = true
+            
+            
+            
         }
         
     }
+    
+    
+    
     
     
     override func viewDidLoad() {
